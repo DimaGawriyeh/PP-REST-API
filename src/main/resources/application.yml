@@ -2,3 +2,16 @@ server:
   port: 8080
   servlet:
     contextPath: /pinkprogramming
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:database
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+    initialization-mode: always
+  liquibase:
+    change-log: classpath:db/liquibase/database.yml
+  h2:
+    console:
+      enabled: true
