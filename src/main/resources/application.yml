@@ -11,7 +11,7 @@ spring:
     password:
     initialization-mode: always
   liquibase:
-    change-log: classpath:db/liquibase/database.yml
+    change-log: classpath:db/changelog/database.yml
   h2:
     console:
       enabled: true
