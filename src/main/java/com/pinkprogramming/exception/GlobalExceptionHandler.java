@@ -1,4 +1,4 @@
-package com.pinkprogramming.controller;
+package com.pinkprogramming.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
