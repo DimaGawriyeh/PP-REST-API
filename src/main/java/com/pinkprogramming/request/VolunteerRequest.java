@@ -1,5 +1,6 @@
 package com.pinkprogramming.request;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -13,11 +14,14 @@ public class VolunteerRequest {
 
     @Size(max = 20)
     @NotNull
+    @Schema(title = "name", example = "name", description = "Volunteer's first name")
     private String name;
     @Size(max = 20)
     @NotNull
+    @Schema(title = "lastName", example = "last name", description = "Volunteer's last name")
     private  String lastName;
     @Size(max = 20)
     @NotNull
+    @Schema(title = "position", example = "position", description = "Volunteer's position")
     private  String position;
 }
