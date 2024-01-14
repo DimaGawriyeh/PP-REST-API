@@ -1,4 +1,4 @@
-package com.pinkprogramming.model;
+package com.pinkprogramming.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

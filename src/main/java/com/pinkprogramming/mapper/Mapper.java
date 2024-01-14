@@ -1,7 +1,7 @@
 package com.pinkprogramming.mapper;
 
 import com.pinkprogramming.dto.VolunteerDto;
-import com.pinkprogramming.model.Volunteer;
+import com.pinkprogramming.entity.Volunteer;
 import com.pinkprogramming.request.VolunteerRequest;
 
 
