@@ -3,11 +3,12 @@ package com.pinkprogramming.mapper;
 import com.pinkprogramming.dto.VolunteerDto;
 import com.pinkprogramming.entity.Volunteer;
 import com.pinkprogramming.request.VolunteerRequest;
+import com.pinkprogramming.response.VolunteerResponse;
 
 
 public class Mapper {
 
-    public static Volunteer mapFromVolunteerDto(VolunteerDto volunteerDto) {
+    public static Volunteer mapFromVolunteerDtoToVolunteer(VolunteerDto volunteerDto) {
 
         return Volunteer.builder()
                 .name(volunteerDto.getName())
@@ -16,7 +17,7 @@ public class Mapper {
                 .build();
     }
 
-    public static VolunteerDto mapFromVolunteer(Volunteer volunteer) {
+    public static VolunteerDto mapFromVolunteerTOVolunteerDto(Volunteer volunteer) {
 
         return VolunteerDto.builder()
                 .name(volunteer.getName())
@@ -25,7 +26,7 @@ public class Mapper {
                 .build();
     }
 
-    public static VolunteerDto mapFromVolunteerRequest(VolunteerRequest volunteerRequest) {
+    public static VolunteerDto mapFromVolunteerRequestToVolunteerDto(VolunteerRequest volunteerRequest) {
 
         return VolunteerDto.builder()
                 .name(volunteerRequest.getName())
@@ -33,4 +34,15 @@ public class Mapper {
                 .position(volunteerRequest.getPosition())
                 .build();
     }
+
+    public static VolunteerResponse mapFromVolunteerDtoToVolunteerResponse(VolunteerDto volunteerDto) {
+
+        return VolunteerResponse.builder()
+                .name(volunteerDto.getName())
+                .lastName(volunteerDto.getLastName())
+                .position(volunteerDto.getPosition())
+                .build();
+    }
+
+
 }

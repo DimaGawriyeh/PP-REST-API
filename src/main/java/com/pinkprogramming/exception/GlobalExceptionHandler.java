@@ -1,5 +1,6 @@
 package com.pinkprogramming.exception;
 
+import com.pinkprogramming.response.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -26,5 +27,13 @@ public class GlobalExceptionHandler {
             errors.put(fieldName, errorMessage);
         });
         return errors;
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(EntityNotFoundException.class)
+    @ResponseBody
+    public ErrorResponse handleEntityNotFoundException(
+            EntityNotFoundException ex) {
+        return new ErrorResponse(ex.getMessage());
     }
 }
