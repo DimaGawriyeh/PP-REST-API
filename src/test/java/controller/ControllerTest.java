@@ -276,10 +276,10 @@ public class ControllerTest {
                 .build();
     }
 
-    private VolunteerRequest createVolunteerRequest(String name, String lasName, String position){
+    private VolunteerRequest createVolunteerRequest(String name, String lastName, String position){
         return VolunteerRequest.builder()
                 .name(name)
-                .lastName(lasName)
+                .lastName(lastName)
                 .position(position)
                 .build();
     }
