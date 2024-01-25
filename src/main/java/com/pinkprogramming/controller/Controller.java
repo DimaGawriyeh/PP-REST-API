@@ -1,8 +1,12 @@
 package com.pinkprogramming.controller;
 
+import com.pinkprogramming.dto.AttendeeDto;
 import com.pinkprogramming.dto.VolunteerDto;
 import com.pinkprogramming.mapper.Mapper;
+import com.pinkprogramming.request.AttendeeRequest;
 import com.pinkprogramming.request.VolunteerRequest;
+import com.pinkprogramming.response.AttendeeResponse;
+import com.pinkprogramming.response.CreateAttendeeResponse;
 import com.pinkprogramming.response.CreateVolunteerResponse;
 import com.pinkprogramming.response.VolunteerResponse;
 import com.pinkprogramming.service.ApplicationService;
@@ -23,12 +27,6 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping
-@SecurityScheme(
-        name = "basicAuth",
-        type = SecuritySchemeType.HTTP,
-        scheme = "basic"
-)
-
 public class Controller {
 
     @Autowired
@@ -85,4 +83,36 @@ public class Controller {
     private VolunteerResponse createVolunteerResponse (VolunteerDto volunteerDto) {
        return Mapper.mapFromVolunteerDtoToVolunteerResponse(volunteerDto);
     }
+
+    // Solution create attendee
+    /*@Operation(summary = "Creates a new attendee", security = @SecurityRequirement(name = "basicAuth"))
+    @PostMapping("/attendees")
+    //@Secured("ROLE_ADMIN")
+    public ResponseEntity<CreateAttendeeResponse> createAttendee(@Valid @RequestBody AttendeeRequest attendeeRequest) {
+        return ResponseEntity.status(HttpStatus.CREATED).
+                body(new CreateAttendeeResponse(applicationService.createAttendee(Mapper.mapFromAttendeeRequestToAttendeeDto(attendeeRequest))));
+    }*/
+
+    // Solution get attendees
+   /* @Operation(summary = "Gets a list of attendees", security = @SecurityRequirement(name = "basicAuth"))
+    @GetMapping("/attendees")
+    //@Secured("ROLE_USER")
+    public ResponseEntity<List<AttendeeResponse>> getAttendees() {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(applicationService.getAttendees().stream().map(this::createAttendeeResponse).collect(Collectors.toList()));
+    }
+
+    private AttendeeResponse createAttendeeResponse (AttendeeDto attendeeDto) {
+        return Mapper.mapFromAttendeeDtoToAttendeeResponse(attendeeDto);
+    }*/
+
+    // Solution delete attendee
+    /*@Operation(summary = "Deletes an existing attendee", security = @SecurityRequirement(name = "basicAuth"))
+    @DeleteMapping("/attendees/{id}")
+    //@Secured("ROLE_ADMIN")
+    public ResponseEntity<Void> deleteAttendee(@Parameter(description = "Attendee's id") @PathVariable String id) {
+        applicationService.deleteAttendee(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }*/
+
 }

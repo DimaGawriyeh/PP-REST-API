@@ -22,3 +22,24 @@ databaseChangeLog:
               - column:
                   name: position
                   type: VARCHAR(20)
+
+  - changeSet:
+      id: Create table attendee
+      author: Dima
+      changes:
+        - createTable:
+            tableName: attendee
+            columns:
+              - column:
+                  name: id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(20)
+              - column:
+                  name: last_name
+                  type: VARCHAR(20)
