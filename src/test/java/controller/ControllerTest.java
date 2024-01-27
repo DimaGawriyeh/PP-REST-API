@@ -2,6 +2,7 @@ package controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pinkprogramming.dto.VolunteerDto;
+import com.pinkprogramming.request.AttendeeRequest;
 import com.pinkprogramming.request.VolunteerRequest;
 import com.pinkprogramming.service.ApplicationService;
 import configuration.TestApplicationConfiguration;
@@ -32,6 +33,10 @@ public class ControllerTest {
     private final String VOLUNTEER_LAST_NAME = "programming";
     private final String VOLUNTEER_POSITION = "pink volunteer";
 
+    // solution test
+    private final String ATTENDEE_NAME = "attendee name";
+    private final String ATTENDEE_LAST_NAME = "attendee last name";
+
     @MockBean
     ApplicationService applicationService;
 
@@ -42,8 +47,8 @@ public class ControllerTest {
     ObjectMapper objectMapper;
 
     @Test
-    @WithMockUser(username = "Admin", roles = {"ADMIN", "USER"})
-    public void createVolunteersTest () throws Exception {
+    @WithMockUser(roles = {"ADMIN", "USER"})
+    public void createVolunteerTest () throws Exception {
         mockMvc.perform(post("/volunteers")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(createVolunteerRequest())))
@@ -54,8 +59,8 @@ public class ControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "User")
-    public void createVolunteersWithUnauthorizedUserTest () throws Exception {
+    @WithMockUser
+    public void createVolunteerWithUnauthorizedUserTest () throws Exception {
         mockMvc.perform(post("/volunteers")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(createVolunteerRequest())))
@@ -64,7 +69,7 @@ public class ControllerTest {
     }
 
     @Test
-    public void createVolunteersWihNoAuthenticationCredentialsTest () throws Exception {
+    public void createVolunteerWihNoAuthenticationCredentialsTest () throws Exception {
         mockMvc.perform(post("/volunteers")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(createVolunteerRequest())))
@@ -73,8 +78,8 @@ public class ControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "Admin", roles = {"ADMIN", "USER"})
-    public void createVolunteersWithInvalidVolunteerRequestsTest () throws Exception {
+    @WithMockUser(roles = {"ADMIN", "USER"})
+    public void createVolunteerWithInvalidVolunteerRequestsTest () throws Exception {
         mockMvc.perform(post("/volunteers")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(createVolunteerRequest(null, "last name", "position"))))
@@ -113,7 +118,7 @@ public class ControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "User")
+    @WithMockUser
     public void getVolunteerTest () throws Exception {
         when(applicationService.getVolunteer(any(String.class))).thenReturn(createVolunteerDto());
         mockMvc.perform(get("/volunteers/{id}", "id")
@@ -136,7 +141,7 @@ public class ControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "User")
+    @WithMockUser
     public void getVolunteersTest () throws Exception {
         when(applicationService.getVolunteers()).thenReturn(List.of(createVolunteerDto()));
         mockMvc.perform(get("/volunteers")
@@ -159,7 +164,7 @@ public class ControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "Admin", roles = {"ADMIN", "USER"})
+    @WithMockUser(roles = {"ADMIN", "USER"})
     public void updateVolunteerTest () throws Exception {
         mockMvc.perform(put("/volunteers/{id}", "id")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -169,7 +174,7 @@ public class ControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "User")
+    @WithMockUser
     public void updateVolunteerWithUnauthorizedUserTest () throws Exception {
         mockMvc.perform(put("/volunteers/{id}", "id")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -188,7 +193,7 @@ public class ControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "Admin", roles = {"ADMIN", "USER"})
+    @WithMockUser(roles = {"ADMIN", "USER"})
     public void updateVolunteersWithInvalidVolunteerRequestsTest () throws Exception {
         mockMvc.perform(put("/volunteers/{id}", "id")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -228,7 +233,7 @@ public class ControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "Admin", roles = {"ADMIN", "USER"})
+    @WithMockUser(roles = {"ADMIN", "USER"})
     public void deleteVolunteerTest () throws Exception {
         mockMvc.perform(delete("/volunteers/{id}", "id")
                         .contentType(MediaType.APPLICATION_JSON))
@@ -237,7 +242,7 @@ public class ControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "User")
+    @WithMockUser
     public void deleteVolunteerWithUnauthorizedUserTest () throws Exception {
         mockMvc.perform(delete("/volunteers/{id}", "id")
                         .contentType(MediaType.APPLICATION_JSON))
@@ -283,4 +288,81 @@ public class ControllerTest {
                 .position(position)
                 .build();
     }
+
+    // solution create attendee tests
+
+   /* private AttendeeRequest createAttendeeRequest(){
+        return AttendeeRequest.builder()
+                .name(ATTENDEE_NAME)
+                .lastName(ATTENDEE_LAST_NAME)
+                .build();
+    }*/
+
+    /*private AttendeeRequest createAttendeeRequest(String name, String lastName){
+        return AttendeeRequest.builder()
+                .name(name)
+                .lastName(lastName)
+                .build();
+    }*/
+
+    /*@Test
+    @WithMockUser(roles = {"ADMIN", "USER"})
+    public void createAttendeeTest () throws Exception {
+        mockMvc.perform(post("/attendees")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(createAttendeeRequest())))
+                .andExpect(status().isCreated())
+                .andDo(print())
+                .andExpectAll(content().contentType(MediaType.APPLICATION_JSON),
+                        jsonPath("$.attendeeId").exists());
+    }*/
+
+
+   /* @Test
+    @WithMockUser
+    public void createAttendeeWithUnauthorizedUserTest () throws Exception {
+        mockMvc.perform(post("/attendees")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(createAttendeeRequest())))
+                .andExpect(status().isForbidden())
+                .andDo(print());
+    }*/
+
+    /*@Test
+    public void createAttendeeWihNoAuthenticationCredentialsTest () throws Exception {
+        mockMvc.perform(post("/attendees")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(createVolunteerRequest())))
+                .andExpect(status().isUnauthorized())
+                .andDo(print());
+    }*/
+
+   /* @Test
+    @WithMockUser(roles = {"ADMIN", "USER"})
+    public void createAttendeeWithInvalidVolunteerRequestsTest () throws Exception {
+        mockMvc.perform(post("/attendees")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(createAttendeeRequest(null, "last name"))))
+                .andExpect(status().isBadRequest())
+                .andDo(print());
+
+        mockMvc.perform(post("/attendees")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(createAttendeeRequest("name", null))))
+                .andExpect(status().isBadRequest())
+                .andDo(print());
+
+        mockMvc.perform(post("/attendees")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(createAttendeeRequest("*".repeat(21), "last name"))))
+                .andExpect(status().isBadRequest())
+                .andDo(print());
+
+        mockMvc.perform(post("/attendees")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(createAttendeeRequest("name", "*".repeat(21)))))
+                .andExpect(status().isBadRequest())
+                .andDo(print());
+
+    }*/
 }

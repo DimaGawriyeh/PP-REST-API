@@ -43,7 +43,7 @@ public class SecurityConfig {
                         .requestMatchers(new AntPathRequestMatcher("/v3/api-docs/**")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/actuator/**")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/volunteers/**")).hasRole("USER")
-                        .requestMatchers(new AntPathRequestMatcher("/attendees/**")).hasRole("USER")
+                      //  .requestMatchers(new AntPathRequestMatcher("/attendees/**")).hasRole("USER")
                         .requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
 
 
