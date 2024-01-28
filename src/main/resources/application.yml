@@ -15,3 +15,14 @@ spring:
   h2:
     console:
       enabled: true
+
+
+logging:
+#  solution log level
+#  level:
+#    root: ERROR
+  file:
+    name: log/service.log
+
+
+
