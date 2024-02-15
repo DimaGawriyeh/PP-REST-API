@@ -5,3 +5,9 @@
 # h2: http://localhost:8080/pinkprogramming/h2-console
 
 # api docs: http://localhost:8080/pinkprogramming/v3/api-docs
+
+######
+# JDBC URL: jdbc:h2:mem:database
+
+# username: Admin
+# password: 123
